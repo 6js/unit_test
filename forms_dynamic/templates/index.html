@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Record Selection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Record Selection</h1>
+
+    <form id="record-form">
+        <label for="selection">Select a category:</label>
+        <select id="selection" name="selection">
+            <option></option>
+            <option value="pillar">Pillar</option>
+            <option value="valuestream">Value Stream</option>
+            <option value="teams">Teams</option>
+        </select>
+
+        <label for="records">Select a record:</label>
+        <select id="records" name="records">
+            <option></option>
+        </select>
+    </form>
+
+    <script>
+        $(document).ready(function() {
+            $('#selection').change(function() {
+            console.log($(this).val());
+                var selection = $(this).val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/get_records',
+                    data: { selection: selection },
+                    success: function(response) {
+                        var recordsSelect = $('#records');
+                        recordsSelect.empty();
+
+                        for (var i = 0; i < response.length; i++) {
+                            recordsSelect.append($('<option>', {
+                                value: response[i].id,
+                                text: response[i].name
+                            }));
+                        }
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

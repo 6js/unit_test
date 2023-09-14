@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Form Example</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <form id="myForm">
+        <label for="section1">Section 1:</label>
+        <select id="section1" name="section1">
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+        </select>
+        <br>
+        <br>
+        <label for="section2">Section 2:</label>
+        <select id="section2" name="section2"></select>
+    </form>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#section1').change(function() {
+                var selectedOption = $(this).val();
+                $.ajax({
+                    type: "POST",
+                    url: "/get_options",
+                    data: {selected_option: selectedOption},
+                    success: function(response) {
+                        $('#section2').html(response);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

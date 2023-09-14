@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Drag and Drop File Upload</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div id="drop-area">
+        <h1>Drag and Drop files here</h1>
+        <p>or</p>
+        <input type="file" id="file-input" multiple>
+        <button id="upload-button">Upload</button>
+    </div>
+    <div id="file-list">
+        <h2>Uploaded Files:</h2>
+        <ul>
+            {% for file in files %}
+                <li>{{ file.filename }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Filename</th>
+                <th>File Path</th>
+            </tr>
+        </thead>
+        <tbody id="file-table-body">
+            {% for file in files %}
+                <tr>
+                    <td>{{ file.id }}</td>
+                    <td>{{ file.filename }}</td>
+                    <td>{{ file.file_path }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
