@@ -3,7 +3,7 @@ name: Test Secret Password
 on:
   push:
     branches:
-      - master  # or any branch you want to test with
+      - master  # or any branch you want to test
 
 jobs:
   check-secret:
