@@ -1,0 +1,16 @@
+name: Test Secret Password
+
+on:
+  push:
+    branches:
+      - master  # or any branch you want to test with
+
+jobs:
+  check-secret:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Show secret (for testing only - not safe for real use!)
+        run: echo "The secret password is ${{ secrets.MY_PASSWORD }}"
