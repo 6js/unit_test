@@ -1,0 +1,18 @@
+name: Use Secret from test-env
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  show-secret:
+    runs-on: ubuntu-latest
+    environment: test-env  # Link to your environment
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Print secret value (for test only!)
+        run: echo "Password is ${{ secrets.MY_SECRET_PASSWORD }}"
