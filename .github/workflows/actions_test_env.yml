@@ -3,7 +3,7 @@ name: Use Secret from test-env
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   show-secret:
